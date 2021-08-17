@@ -43,6 +43,15 @@ jobs:
       # action workspace directory.
       #
       - name: Invoke the private action in our job
+        id: private_action_invocation
         uses: ./private-action
+        
+      #
+      # Show the output value from the private action
+      #
+      - name: Show private action output value
+        run: echo "Date output from the private action invocation = ${{ steps.private_action_invocation.outputs.date }}"
+        shell: bash
+      
           
       
