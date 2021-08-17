@@ -6,4 +6,4 @@ This approach allows you to utilize a private or internal access scoped action t
 
 Ultimately this will become unnecessary as there is a Github Roadmap item; [Actions: Use actions from internal repositories](https://github.com/github/roadmap/issues/74) that will be providing an ability to do this in a much more stremalined and controlled way.
 
-Consult the workflow file [.github/workflows/use_private_action.yml](.github/workflows/use_private_action.yml)
+Consult the workflow file [.github/workflows/use_private_action.yml](.github/workflows/use_private_action.yml) for more aspects and an eaxmple workflow on how to achieve using a private or internal action in a workflow.
