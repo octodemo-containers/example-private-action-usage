@@ -21,8 +21,8 @@ jobs:
         id: temporary_token
         uses: peter-murray/workflow-application-token-action@v1
         with:
-          application_id: ${{ secrets.token_application_id }}
-          application_private_key: ${{ secrets.token_application_private_key }}
+          application_id: ${{ secrets.OCTODEMOBOT_APPLICATION_ID }}
+          application_private_key: ${{ secrets.OCTODEMOBOT_APPLICATION_KEY_REPO_AUTOMATION }}
           
       #
       # Clone the private or internal action locally to our workspace in the specified directory (private-action). Here we are targeting a reference tag like you
