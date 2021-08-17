@@ -1,0 +1,45 @@
+name: Using a Private Action
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  use_private_action:
+    name: Use Private Action
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      #
+      # This action step will obtain a temporary time limited access token (like the secrets.GITHUB_TOKEN) but the the necessary permissions to access the private action.
+      #
+      # The GitHub application here allows us to obtain a very tightly scoped access token when compared to a PAT from a user as the GitHub Application has to be installed
+      # on the respository or organization and only requires read access to the repository or organization. PATs will operate with all the permissions of the user so have
+      # higher level access than is desirable in this case.
+      #
+      - name: Generate temporarty access token
+        id: temporary_token
+        uses: peter-murray/workflow-application-token-action@v1
+        with:
+          application_id: ${{ secrets.token_application_id }}
+          application_private_key: ${{ secrets.token_application_private_key }}
+          
+      #
+      # Clone the private or internal action locally to our workspace in the specified directory (private-action). Here we are targeting a reference tag like you
+      # would when referencing a GitHub Action from the marketplace.
+      #
+      - name: Clone private action
+        uses: actions/checkout@v2
+        with:
+          repository: octodemo-containers/private-action
+          ref: v1
+          token: ${{ steps.temporary_token.outputs.token }}
+          path: private-action
+       
+      #
+      # Use the private action like it would have been provided via the Actions marketplace by referencing the cloned action directory
+      #
+      - name: Invoke the private action in our job
+        uses: ./private-action
+          
+      
