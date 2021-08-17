@@ -19,12 +19,16 @@ jobs:
       # access to the repository or organization. PATs will operate with all the permissions of the user so have higher 
       # level access than is desirable in this case.
       #
+      # In this example the GitHub Application is owned by the organization, and is installed on this repository via
+      # selected repositories for it.
+      #
       - name: Generate temporarty access token
         id: temporary_token
         uses: peter-murray/workflow-application-token-action@v1
         with:
           application_id: ${{ secrets.PRIVATE_ACTIONS_APPLICATION_ID }}
           application_private_key: ${{ secrets.PRIVATE_ACTIONS_APPLICATION_PRIVATE_KEY }}
+          organization: octodemo-containers
           
       #
       # Clone the private or internal action locally to our workspace in the specified directory (private-action).
